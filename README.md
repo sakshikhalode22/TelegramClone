@@ -1,2 +1,3 @@
 # TelegramClone
-This is Pixel Perfect replica of Telegram
+This is Pixel Perfect replica of Telegram Project
+
