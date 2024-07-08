@@ -9,7 +9,7 @@ This is Pixel Perfect replica of Telegram Chat ui Project
    ->completed
    ->Used Material Ui Tab component to complete this requirement
 5. Chats with date and time
-   ->Partial complted
+   ->Partial completed
    ->Fetched chat from given get_chat_messages api
 7. Pin message
    ->Not completed
