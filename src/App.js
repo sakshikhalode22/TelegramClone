@@ -1,24 +1,76 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState,useMemo,createContext } from 'react';
+import {  ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import Navigator from './Components/Navigator';
+import { grey,deepPurple,teal } from '@mui/material/colors';
 
-function App() {
+const ColorModeContext = createContext({ toggleColorMode: () => {} });
+
+const App =() =>{
+  const [mode, setMode] = useState('light');
+  
+  const colorMode = useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+      },
+    }),
+    [],
+  );
+
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+          border:{
+            primary:grey[500],
+            secondary:grey[300]
+          },
+          ...(mode === 'dark'
+            ? {
+                primary: grey,
+                secondary:deepPurple,
+                header:{
+                  primary:grey[600]
+                },
+                background: {
+                  default: grey[900],
+                  paper: grey[700],
+                },
+                
+                text: {
+                  primary: '#fff',
+                  secondary: grey[500],
+                },
+              }
+            : {
+                primary: grey,
+                secondary:teal,
+                header:{
+                  primary:teal[200]
+                },
+                background: {
+                  default: grey[100],
+                  paper: grey[300],
+                },
+                text: {
+                  primary: grey[900],
+                  secondary: grey[800],
+                },
+              }),
+        },
+      }),
+    [mode],
+  );
+ 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ColorModeContext.Provider value={colorMode}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Navigator ColorModeContext={ColorModeContext} />
+    </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 }
 
