@@ -19,4 +19,4 @@ This is Pixel Perfect replica of Telegram Chat ui Project
     ->Partial completed
     ->Theme is getting changes between dark and light mode
 13. Mobile view
-    ->Partial completed
+    ->Partial completed -> Navigation Bar
